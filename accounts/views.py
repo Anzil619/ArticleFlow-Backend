@@ -53,7 +53,6 @@ class ChangePassword(APIView):
 
     def put(self, request):
         user = request.user
-        # Check if user instance exists
         if not user:
             raise PermissionDenied("User not found.")
 
@@ -70,13 +69,13 @@ class ChangePassword(APIView):
         if not old_password or not new_password:
             return Response({'error': 'Both old and new passwords are required.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Check if old password matches the current password
         if not user.check_password(old_password):
             return Response({'error': 'Invalid old password.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Set the new password and save the user
         user.set_password(new_password)
         user.save()
 
         return Response({'message': 'Password changed successfully.'}, status=status.HTTP_200_OK)
+
+
 

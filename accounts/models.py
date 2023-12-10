@@ -14,4 +14,3 @@ class Preferences(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     preference = models.CharField(max_length=50)
 
-    
