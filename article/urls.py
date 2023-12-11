@@ -13,6 +13,9 @@ urlpatterns = [
     path('getuserpreference/<int:userid>/', GetUserPreference.as_view(), name='getuserpreference'),
     path('deletepreference/<int:pk>/', DeletePreference.as_view(), name='updatepreference'),
     path('createpreference/', CreatePreference.as_view(), name='createpreference'),
+    path('user-interaction/', ArticleInteractions.as_view(), name='user-interaction'),
+
+
     
 
 ]

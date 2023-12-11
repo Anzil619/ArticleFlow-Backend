@@ -59,7 +59,7 @@ class UserInteraction(models.Model):
         self.save()
 
     def __str__(self):
-        return f"{self.user.username} - {self.article.name} Interaction"
+        return f"{self.user.username} - {self.article.article_name} Interaction"
 
 
 
