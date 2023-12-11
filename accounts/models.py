@@ -10,7 +10,7 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD='email'
     REQUIRED_FIELDS=['phone','username','dob']
 
-class Preferences(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    preference = models.CharField(max_length=50)
+
+
+
 

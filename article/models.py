@@ -3,11 +3,23 @@ from accounts.models import CustomUser
 # Create your models here.
 
 
+
 class Categories(models.Model):
     category = models.CharField(max_length=50)
 
     def __str__(self):
         return self.category
+    
+class UserPreferences(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    preference = models.ForeignKey(Categories,on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = [['user', 'preference']]
+
+
+
+
 
 
 class Article(models.Model):
@@ -17,6 +29,8 @@ class Article(models.Model):
     image = models.ImageField(upload_to='article_image/',null=True,blank=True)
     tags = models.CharField(max_length=50, null=True, blank=True)
     category = models.ForeignKey(Categories,on_delete=models.CASCADE)
+
+
 
 
 class UserInteraction(models.Model):
