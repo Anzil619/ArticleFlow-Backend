@@ -6,7 +6,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ('id', 'username', 'first_name', 'last_name', 'email','password', 'phone', 'dob','is_superuser')
+        fields = ('id', 'username', 'first_name', 'last_name', 'email','password', 'phone', 'dob','is_superuser','is_completed')
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     
@@ -24,6 +24,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             'phone': user.phone,
             'dob': user.dob.strftime('%Y-%m-%d'),
             'is_superuser':user.is_superuser,
+            'is_completed':user.is_completed,
         }
 
         return token

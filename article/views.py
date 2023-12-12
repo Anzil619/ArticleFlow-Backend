@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework.generics import CreateAPIView,ListCreateAPIView,DestroyAPIView,RetrieveUpdateAPIView
+from rest_framework.generics import CreateAPIView,ListCreateAPIView,DestroyAPIView,RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated,AllowAny
 from .models import Article,Categories,UserPreferences,UserInteraction
 from .serializers import ArticleSerializer,CategorySerializer,CreateArticleSerialzer,UserPreferencesSerializers,GetUserPreferences,UserInteractionSerializer
@@ -17,6 +17,10 @@ class CreateArticle(CreateAPIView):
     serializer_class = CreateArticleSerialzer
     permission_classes = (AllowAny,)
     
+class EditArticle(RetrieveUpdateDestroyAPIView):
+    queryset = Article.objects.all()
+    serializer_class = CreateArticleSerialzer
+    permission_classes = (AllowAny,)
     
 
 
@@ -86,6 +90,16 @@ class CreatePreference(CreateAPIView):
     serializer_class = UserPreferencesSerializers  
     queryset = UserPreferences.objects.all()
     
+
+class UserPreferencesBulkCreate(APIView):
+    def post(self, request, format=None):
+        serializer = UserPreferencesSerializers(data=request.data, many=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
 
 class ArticleInteractions(APIView):
 
