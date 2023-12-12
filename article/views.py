@@ -40,7 +40,6 @@ class GetArticles(APIView):
         ids_string = category_ids[0]  
         ids_list = ids_string.split(',')  
 
-        # print(category_ids,"anzil")
         category_ids = [int(id) for id in ids_list if id.isdigit()]
         print(category_ids,"anzil")
 

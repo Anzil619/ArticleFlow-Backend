@@ -57,7 +57,6 @@ class ChangePassword(APIView):
             raise PermissionDenied("User not found.")
 
 
-        # Check if both old and new passwords are provided in the request data
         old_password = request.data.get('current_password')
         new_password = request.data.get('new_password')
 
